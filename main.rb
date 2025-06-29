@@ -78,7 +78,7 @@ get '/debug' do
   }.to_json
 end
 
-# Корневой эндпоинт
+# Root
 get '/' do
   content_type :json
   {
@@ -91,11 +91,92 @@ get '/' do
   }.to_json
 end
 
+### Main code ###
+
+def extract_current_reply_author_email(payload)
+  item = payload.dig('data', 'item') || {}
+  parts = item.dig('conversation_parts', 'conversation_parts') || []
+  return nil if parts.empty?
+
+  latest_part = parts.last
+  author = latest_part['author'] || {}
+  author['email']
+end
+
+def excluded_author_email?(payload)
+  email = extract_current_reply_author_email(payload)
+  return false unless email
+
+  EXCLUDED_EMAILS.map(&:downcase).include?(email.downcase)
+end
+
 post '/intercom-webhook' do
   content_type :json
-  data = JSON.parse(request.body.read) rescue {}
-  puts "Webhook получен: #{data.inspect}"
-  { status: 'ok', message: 'Webhook обработан (логика будет позже)' }.to_json
+  begin
+    payload = JSON.parse(request.body.read)
+  rescue JSON::ParserError => e
+    puts "\u274c Invalid JSON payload: #{e}"
+    status 400
+    return { status: 'error', message: 'Invalid JSON' }.to_json
+  end
+
+  puts "Webhook получен: #{payload.inspect}"
+
+  if excluded_author_email?(payload)
+    puts "\u274c Email author at excluded list - no actions"
+    status 200
+    return{
+      status: 'skipped',
+      reason: 'Author email in exclusion list'
+  }.to_json
+  end
+
+  conversation_id = payload.dig('data', 'item', 'id')
+
+  unless conversation_id
+    puts "\u274c Conversation ID not found in payload"
+    status 400
+    return { status: 'error', message: 'Conversation ID missing' }.to_json
+  end
+
+  unless ASANA_CLIENT
+    puts "\u274c Asana client not initialized"
+    status 500
+    return { status: 'error', message: 'Asana client not configured' }.to_json
+  end
+
+  task = ASANA_CLIENT.find_task_by_conversation_id(conversation_id)
+
+  unless task
+    puts "\u274c Task not found for conversation #{conversation_id}"
+    status 404
+    return {
+      status: 'error',
+      message: 'Task not found for conversation',
+      conversation_id: conversation_id
+    }.to_json
+  end
+
+  moved = ASANA_CLIENT.move_task_to_section(task[:gid])
+
+  if moved
+    puts "\u2705 Moved task #{task[:gid]} for conversation #{conversation_id}"
+    {
+      status: 'success',
+      message: 'Task moved to target section',
+      conversation_id: conversation_id,
+      task: task
+    }.to_json
+  else
+    puts "\u274c Failed to move task #{task[:gid]} for conversation #{conversation_id}"
+    status 500
+    {
+      status: 'error',
+      message: 'Failed to move task',
+      conversation_id: conversation_id,
+      task: task
+    }.to_json
+  end
 end
 
 # Запуск сервера

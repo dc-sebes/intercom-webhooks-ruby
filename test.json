@@ -1,0 +1,170 @@
+{
+  "type": "notification_event",
+  "app_id": "grcvqyws",
+  "data": {
+    "type": "notification_event_data",
+    "item": {
+      "type": "conversation",
+      "id": "4107",
+      "created_at": 1750854761,
+      "updated_at": 1751042715,
+      "waiting_since": 1751042712,
+      "snoozed_until": null,
+      "source": {
+        "type": "email",
+        "id": "23179",
+        "delivered_as": "admin_initiated",
+        "subject": "Fraud Advice Report, 25/06/2025 / Shahab Delavarkhan / diamondblingdubai@protonmail.com",
+        "body": "<p class=\"no-margin\">Dear Team,</p> ...",
+        "author": {
+          "type": "admin",
+          "id": "50049318",
+          "name": "Nikita Rozkalns",
+          "email": "n.rozkalns@sebestech.com"
+        },
+        "attachments": [],
+        "url": null,
+        "redacted": false
+      },
+      "contacts": {
+        "type": "contact.list",
+        "contacts": [
+          { "type": "contact", "id": "680794e918aedd39d81d0d58", "external_id": "cdc5d9f8-c911-4b21-9b1e-46fd9cdc048f" },
+          { "type": "contact", "id": "680b412934dc1cb5f8d67f3a", "external_id": "e021e9d7-deb5-4508-ab97-4a5d2d5ebdfd" },
+          { "type": "contact", "id": "681385bd76e7a9231ec85f9b", "external_id": "a6b4a098-1d30-43e3-9ebe-b003170d22bb" },
+          { "type": "contact", "id": "66c5ed9c8f679ebc54d09ecc", "external_id": "415f0cb8-9bba-420c-b882-fc5efb931300" },
+          { "type": "contact", "id": "683efd9b89ae7ad2ac766f17", "external_id": "91ea3ffc-3085-4e36-a2ae-79111a3df66a" }
+        ]
+      },
+      "first_contact_reply": {
+        "created_at": 1751042713,
+        "type": null,
+        "url": null
+      },
+      "admin_assignee_id": null,
+      "team_assignee_id": 50014894,
+      "open": true,
+      "state": "open",
+      "read": false,
+      "tags": {
+        "type": "tag.list",
+        "tags": [
+          {
+            "type": "tag",
+            "id": "208097",
+            "name": "Fraud Advice",
+            "applied_at": 1750854762,
+            "applied_by": { "type": "admin", "id": "50049318" }
+          }
+        ]
+      },
+      "priority": "not_priority",
+      "sla_applied": null,
+      "statistics": {
+        "type": "conversation_statistics",
+        "time_to_assignment": null,
+        "time_to_admin_reply": null,
+        "time_to_first_close": null,
+        "time_to_last_close": null,
+        "median_time_to_reply": null,
+        "first_contact_reply_at": "2025-06-27T16:45:13.000Z",
+        "first_assignment_at": null,
+        "first_admin_reply_at": null,
+        "first_close_at": null,
+        "last_assignment_at": null,
+        "last_assignment_admin_reply_at": null,
+        "last_contact_reply_at": "2025-06-27T16:45:13.000Z",
+        "last_admin_reply_at": null,
+        "last_close_at": null,
+        "last_closed_by_id": null,
+        "count_reopens": 0,
+        "count_assignments": 0,
+        "count_conversation_parts": 8,
+        "assigned_team_first_response_time": [],
+        "assigned_team_first_response_time_in_office_hours": [],
+        "handling_time": null
+      },
+      "conversation_rating": null,
+      "teammates": {
+        "type": "admin.list",
+        "admins": [
+          { "type": "admin", "id": "50049318" }
+        ]
+      },
+      "title": "Fraud Advice Report, 25/06/2025 / Shahab Delavarkhan / diamondblingdubai@protonmail.com",
+      "custom_attributes": {
+        "Has attachments": false,
+        "Auto-translated": false,
+        "Fin AI Agent: Preview": false,
+        "Copilot used": false,
+        "Brand": "Sebes Technology",
+        "Created by": 50049318,
+        "Language": "English"
+      },
+      "topics": {
+        "type": "topic.list",
+        "topics": [],
+        "total_count": 0
+      },
+      "ticket": null,
+      "linked_objects": {
+        "type": "list",
+        "data": [],
+        "total_count": 0,
+        "has_more": false
+      },
+      "ai_agent": null,
+      "ai_agent_participated": false,
+      "conversation_parts": {
+        "type": "conversation_part.list",
+        "conversation_parts": [
+          {
+            "type": "conversation_part",
+            "id": "23913",
+            "part_type": "comment",
+            "body": "<p>Dear SEBES team,</p> ...",
+            "created_at": 1751042713,
+            "updated_at": 1751042713,
+            "notified_at": 1751042713,
+            "assigned_to": null,
+            "author": {
+              "id": "680b412934dc1cb5f8d67f3a",
+              "type": "user",
+              "name": "fraudteam sofiastars.com",
+              "email": "fraudteam@sofiastars.com"
+            },
+            "attachments": [],
+            "external_id": null,
+            "redacted": false,
+            "metadata": {},
+            "email_message_metadata": {
+              "subject": "Re: [EXTERNAL SENDER] Fraud Advice Report, ...",
+              "email_address_headers": [
+                { "type": "from", "name": "fraudteam sofiastars.com", "email_address": "fraudteam@sofiastars.com" },
+                { "type": "to", "name": "Sebes Support", "email_address": "help@sebestech.com" },
+                { "type": "cc", "name": null, "email_address": "support@sebestech.com" },
+                { "type": "cc", "name": null, "email_address": "compliance@sebestech.com" },
+                { "type": "cc", "name": null, "email_address": "kyc_verifications@wdsupportltd.com" },
+                { "type": "cc", "name": "fraudteam sofiastars.com", "email_address": "fraudteam@sofiastars.com" }
+              ]
+            },
+            "state": "open",
+            "tags": [],
+            "event_details": {},
+            "app_package_code": null
+          }
+        ],
+        "total_count": 1
+      }
+    }
+  },
+  "links": {},
+  "id": "notif_991abcf2-0354-4e3f-ba32-742b8eb4b3f1",
+  "topic": "conversation.user.replied",
+  "delivery_status": "retry",
+  "delivery_attempts": 2,
+  "delivered_at": 0,
+  "first_sent_at": 1751042724,
+  "created_at": 1751042716,
+  "self": null
+}
