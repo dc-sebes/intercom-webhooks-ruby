@@ -4,7 +4,7 @@ require 'json'
 require 'dotenv/load'
 require_relative './asana_client'
 
-# Список email'ов, для которых НЕ нужно выполнять перенос задач в Asana
+# List of email addresses for which tasks should not be moved in Asana
 EXCLUDED_EMAILS = [
   "i.konovalov@sebestech.com",
   "f.veips@sebestech.com",
@@ -21,14 +21,14 @@ def init_asana_client
   if ENV['ASANA_ACCESS_TOKEN']
     begin
       client = AsanaClient.new
-      puts "✅ Asana клиент успешно инициализирован"
+      puts "✅ Asana client initialized successfully"
       return client
     rescue => e 
-      puts "❌ Ошибка при инициализации Asana: #{e}"
+      puts "❌ Error initializing Asana: #{e}"
       nil
     end
   else
-    puts "❌ Asana клиент не инициализирован - отсутствует ASANA_ACCESS_TOKEN"
+    puts "❌ Asana client not initialized - ASANA_ACCESS_TOKEN missing"
     nil
   end
 end
@@ -36,10 +36,10 @@ end
 
 def init_intercom_client
   if ENV['INTERCOM_ACCESS_TOKEN']
-    puts "✅ Intercom клиент успешно инициализирован"
+    puts "✅ Intercom client initialized successfully"
     #IntercomClient.new
   else
-    puts "❌ Intercom клиент не инициализирован - отсутствует INTERCOM_ACCESS_TOKEN"
+    puts "❌ Intercom client not initialized - INTERCOM_ACCESS_TOKEN missing"
     nil
   end
 end
@@ -66,12 +66,12 @@ get '/debug' do
   content_type :json
   {
     environment_variables: {
-      ASANA_ACCESS_TOKEN: ENV['ASANA_ACCESS_TOKEN'] ? "***СКРЫТО***" : "НЕ УСТАНОВЛЕН",
-      ASANA_PROJECT_GID: ENV['ASANA_PROJECT_GID'] || 'НЕ УСТАНОВЛЕН',
-      ASANA_TARGET_SECTION_GID: ENV['ASANA_TARGET_SECTION_GID'] || 'НЕ УСТАНОВЛЕН',
-      PORT: ENV['PORT'] || 'НЕ УСТАНОВЛЕН',
-      DEBUG: ENV['DEBUG'] || 'НЕ УСТАНОВЛЕН',
-      INTERCOM_ACCESS_TOKEN: ENV['INTERCOM_ACCESS_TOKEN'] || 'НЕ УСТАНОВЛЕН'
+      ASANA_ACCESS_TOKEN: ENV['ASANA_ACCESS_TOKEN'] ? "***HIDDEN***" : "NOT SET",
+      ASANA_PROJECT_GID: ENV['ASANA_PROJECT_GID'] || 'NOT SET',
+      ASANA_TARGET_SECTION_GID: ENV['ASANA_TARGET_SECTION_GID'] || 'NOT SET',
+      PORT: ENV['PORT'] || 'NOT SET',
+      DEBUG: ENV['DEBUG'] || 'NOT SET',
+      INTERCOM_ACCESS_TOKEN: ENV['INTERCOM_ACCESS_TOKEN'] || 'NOT SET'
     },
     asana_client_initialized: !!ASANA_CLIENT,
     ruby_version: RUBY_VERSION
@@ -120,15 +120,15 @@ post '/intercom-webhook' do
     return { status: 'error', message: 'Invalid JSON' }.to_json
   end
 
-  puts "Webhook получен: #{payload.inspect}"
+  puts "Webhook received: #{payload.inspect}"
 
   if excluded_author_email?(payload)
-    puts "\u274c Email author at excluded list - no actions"
+    puts "\u274c Author email is in the exclusion list - no action"
     status 200
-    return{
+    return {
       status: 'skipped',
       reason: 'Author email in exclusion list'
-  }.to_json
+    }.to_json
   end
 
   conversation_id = payload.dig('data', 'item', 'id')
@@ -179,6 +179,6 @@ post '/intercom-webhook' do
   end
 end
 
-# Запуск сервера
+# Start the server
 set :bind, '0.0.0.0'
 set :port, ENV['PORT'] || 8080
