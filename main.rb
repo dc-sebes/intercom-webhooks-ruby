@@ -2,6 +2,7 @@ require 'puma'
 require 'sinatra'
 require 'json'
 require 'dotenv/load'
+require_relative './asana_client'
 
 # Список email'ов, для которых НЕ нужно выполнять перенос задач в Asana
 EXCLUDED_EMAILS = [
@@ -16,28 +17,27 @@ EXCLUDED_EMAILS = [
   "d.ciruks@sebestech.com"
 ]
 
-class AsanaClient
-  # 
-end
-
-class IntercomClient
-  # 
-end
-
 def init_asana_client
   if ENV['ASANA_ACCESS_TOKEN']
-    puts "✅ Asana клиент успешно инициализирован"
-    AsanaClient.new
+    begin
+      client = AsanaClient.new
+      puts "✅ Asana клиент успешно инициализирован"
+      return client
+    rescue => e 
+      puts "❌ Ошибка при инициализации Asana: #{e}"
+      nil
+    end
   else
     puts "❌ Asana клиент не инициализирован - отсутствует ASANA_ACCESS_TOKEN"
     nil
   end
 end
 
+
 def init_intercom_client
   if ENV['INTERCOM_ACCESS_TOKEN']
     puts "✅ Intercom клиент успешно инициализирован"
-    IntercomClient.new
+    #IntercomClient.new
   else
     puts "❌ Intercom клиент не инициализирован - отсутствует INTERCOM_ACCESS_TOKEN"
     nil
