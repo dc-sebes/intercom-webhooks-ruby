@@ -1,1 +1,97 @@
+# Environment variables and secrets
 .env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Ruby
+*.gem
+*.rbc
+/.config
+/coverage/
+/InstalledFiles
+/pkg/
+/spec/reports/
+/spec/examples.txt
+/test/tmp/
+/test/version_tmp/
+/tmp/
+.bundle/
+vendor/bundle
+.byebug_history
+.ruby-version
+.ruby-gemset
+
+# Rails (if applicable)
+/log/*
+!/log/.keep
+/storage/*
+!/storage/.keep
+/public/uploads
+/public/assets
+/public/packs
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS generated files
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Backup files
+*.bak
+*.backup
+*.sql
+
+# API keys and tokens
+config/secrets.yml
+config/master.key
+config/credentials.yml.enc
+secrets.json
+api_keys.txt
+tokens.txt
+
+# SSL certificates
+*.crt
+*.ca-bundle
+ssl/
+
+# Database
+*.sqlite3
+*.db
+dump.rdb
+
+# Temporary files
+*.tmp
+.sass-cache/
+.cache/
+
+# Documentation that might contain sensitive info
+/doc/api/
+NOTES.md
+TODO.private
+
+# Deployment and infrastructure
+Dockerfile.local
+docker-compose.override.yml
+.terraform/
+*.tfstate
+*.tfvars
+
+# Monitoring and profiling
+newrelic.yml
+.newrelic_rpm/
